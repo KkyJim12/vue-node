@@ -1,28 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <input type="text" v-model="text" />
+    <button type="button" @click="sendText()">Send !!</button>
+    <ul>
+      <li v-for="show in message" :key="show.index">{{ show }}</li>
+    </ul>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      text: "",
+      message: []
+    };
+  },
+  sockets: {
+    connect: function() {
+      console.log("socket connected");
+    },
+    message: function(msg) {
+      this.message.push(msg);
+    }
+  },
+  methods: {
+    sendText() {
+      this.$socket.emit("message", this.text);
+    }
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
