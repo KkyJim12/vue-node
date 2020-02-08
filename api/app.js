@@ -27,7 +27,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 require("./routes/User")(app);
-require("./routes/categoryRoute")(app);
+require("./routes/Category")(app);
+require("./routes/Image")(app);
 
 server.listen(80);
 

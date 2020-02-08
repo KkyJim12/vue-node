@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Category = mongoose.model("category");
 
-
 module.exports = app => {
   // Get all Categories
   app.get("/api/category", async (req, res) => {
